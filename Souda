@@ -1,0 +1,68 @@
+{% include helpers/subhead-links.md %}
+
+{% autocrossref %}
+
+The oldest outputs are the most reliable, as the longer it's been since
+they were received, the more blocks would need to be modified to double
+spend them. However, after just a few blocks, a point of rapidly
+diminishing returns is reached. The [original Bitcoin paper][bitcoinpdf]
+predicts the chance of an attacker being able to modify old blocks,
+assuming the attacker has 30% of the total network hashing power:
+
+| Blocks | Chance of successful modification |
+|--------|----------------------------------|
+| 5      | 17.73523%                        |
+| 10     | 4.16605%                         |
+| 15     | 1.01008%                         |
+| 20     | 0.24804%                         |
+| 25     | 0.06132%                         |
+| 30     | 0.01522%                         |
+| 35     | 0.00379%                         |
+| 40     | 0.00095%                         |
+| 45     | 0.00024%                         |
+| 50     | 0.00006%                         |
+
+FIFO does have a small advantage when it comes to transaction fees, as
+older outputs may be eligible for inclusion in the 50,000 bytes set
+aside for no-fee-required high-priority transactions by miners running the default Bitcoin Core
+codebase.  However, with transaction fees being so low, this is not a
+significant advantage.
+
+The only practical use of FIFO is by receivers who spend all or most
+of their income within a few blocks, and who want to reduce the
+chance of their payments becoming accidentally invalid. For example,
+a receiver who holds each payment for six confirmations, and then
+spends 100% of verified payments to vendors and a savings account on
+a bi-hourly schedule.
+
+{% endautocrossref %}
+
+### Rebilling Recurring Payments
+{% include helpers/subhead-links.md %}
+
+{% autocrossref %}
+
+Automated recurring payments are not possible with decentralized Bitcoin
+wallets. Even if a wallet supported automatically sending non-reversible
+payments on a regular schedule, the user would still need to start the
+program at the appointed time, or leave it running all the time
+unprotected by encryption.
+
+This means automated recurring Bitcoin payments can only be made from a
+centralized server which handles satoshis on behalf of its spenders. In
+practice, receivers who want to set prices in fiat terms must also let
+the same centralized server choose the appropriate exchange rate.
+
+Non-automated rebilling can be managed by the same mechanism used before
+credit-card recurring payments became common: contact the spender and
+ask them to pay again---for example, by sending them a PaymentRequest
+`bitcoin:` URI in an HTML email.
+
+In the future, extensions to the payment protocol and new wallet
+features may allow some wallet programs to manage a list of recurring
+transactions. The spender will still need to start the program on a
+regular basis and authorize payment---but it should be easier and more
+secure for the spender than clicking an emailed invoice, increasing the
+chance receivers get paid on time.
+
+{% endautocrossref %}
